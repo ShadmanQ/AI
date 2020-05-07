@@ -12,7 +12,7 @@ class Perceptron():
         self.weights = weights
         self.bias = np.ones(self.training_data.shape[0])
 
-    def train(self):
+    def predict(self):
         for i in range(len(self.training_data)):
             eval = self.bias[i] * self.weights[0] + self.training_data[i][0] * \
                 self.weights[1] + self.training_data[i][1] + \
