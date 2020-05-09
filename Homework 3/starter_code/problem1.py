@@ -21,7 +21,7 @@ def visualize_scatter(df,
       - feat1: column name of first feature
       - feat2: column name of second feature
       - labels: column name of labels
-      - weights: [w1, w2, b] 
+      - weights: [w1, w2, b]
     """
 
     # Draw color-coded scatter plot
@@ -85,15 +85,13 @@ class Perceptron():
                 self.weights -= [1, self.training_data[i][0], self.training_data[i][1]]
 
 
-def main():
+if __name__ == "__main__":
     np.set_printoptions(suppress=True)
     input_args = sys.argv
     data = np.loadtxt(input_args[1], delimiter=',', dtype=float)
 
     weights = np.zeros(3)
     output_weights = np.empty(data[0].shape, data[0].dtype)
-
-    visualize_scatter(data)
 
     Pete = Perceptron(data, weights)
     running = True
@@ -105,14 +103,14 @@ def main():
         if (wrong == 0):
             break
 
+    # reformatting columns to fit specifications.
     rows = int(output_weights.shape[0]) / 3
     rows = int(rows)
     output_weights = output_weights.reshape(rows, 3)
     output_weights[:, [0, 1]] = output_weights[:, [1, 0]]
     output_weights[:, [1, 2]] = output_weights[:, [2, 1]]
     output_weights = output_weights.astype('int')
-    print(output_weights.dtype)
+
+    pd_data = pd.read_csv(input_args[1], header=None)
+    visualize_scatter(pd_data, weights=output_weights[output_weights.shape[0] - 1])
     np.savetxt(input_args[2], output_weights, delimiter=',', fmt='%i')
-
-
-main()
