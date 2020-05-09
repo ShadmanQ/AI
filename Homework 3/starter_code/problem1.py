@@ -93,6 +93,8 @@ def main():
     weights = np.zeros(3)
     output_weights = np.empty(data[0].shape, data[0].dtype)
 
+    visualize_scatter(data)
+
     Pete = Perceptron(data, weights)
     running = True
     while(running):
