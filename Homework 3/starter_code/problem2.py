@@ -18,18 +18,23 @@ def normalize_and_prep(raw_data):
     return intercepts
 
 
-def regression(data_set, alphas):
-    reg_function = alphas[8] * data_set[1][2]
-    print(reg_function)
+def regression(data_set, alphas, betas):
+    i = 3
+    reg_function = betas[0] + betas[1] * data_set[i][1] + betas[2] * \
+        data_set[i][2] + betas[3] * data_set[i][3]
+
+
+def loss_function():
+    r = 1 / 2n * (betas[0] - betas[1][])
 
 
 if __name__ == "__main__":
-    betas = np.zeros(3)
     input_args = sys.argv
     data = np.loadtxt(input_args[1], delimiter=',', dtype=float)
     data2 = pd.read_csv(input_args[1], header=None)
+    betas = np.zeros(data.shape[1] + 1)
     scaled_data = normalize_and_prep(data)
     learning_rates = [0.001, 0.005, 0.01, 0.05, 0.1,
                       0.5, 1, 5, 10]
 
-    regression(scaled_data, learning_rates)
+    regression(scaled_data, learning_rates, betas)
